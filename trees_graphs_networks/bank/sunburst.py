@@ -21,12 +21,21 @@ for i, (label, path) in enumerate(hierarchies.items()):
 
 first = list(hierarchies)[0]
 fig.update_layout(
-    title=f'Bank Marketing Sunburst — {first}',
+    title=dict(
+        text=f'Bank Marketing Sunburst — {first}',
+        x=0.5,
+        xanchor='center',
+    ),
+    margin=dict(t=100),
     updatemenus=[dict(
-        buttons=[dict(label=label, method='update',
-                      args=[{'visible': [j == i for j in range(len(hierarchies))]},
-                            {'title': f'Bank Marketing Sunburst — {label}'}])
-                 for i, label in enumerate(hierarchies)],
+        buttons=[dict(
+            label=label,
+            method='update',
+            args=[
+                {'visible': [j == i for j in range(len(hierarchies))]},
+                {'title.text': f'Bank Marketing Sunburst — {label}'},
+            ],
+        ) for i, label in enumerate(hierarchies)],
         direction='down', x=0.0, xanchor='left', y=1.15, yanchor='top',
     )],
 )
